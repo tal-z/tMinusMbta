@@ -1,0 +1,111 @@
+<!--users/templates/users/dashboard.html-->
+
+{% extends 'base.html' %}
+
+{% block meta %}<meta http-equiv="refresh" content="15">{% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<p class="display-8 lead"><strong>Hello, {{ user.first_name|default:user.username }}!</strong></p>
+
+<h2>My Timers</h2>
+<div class="panel panel-default">
+    <script type="text/javascript">
+            function decrement(duration) {
+                if (duration > 0)
+                    {duration -= 1}
+                return duration
+            }
+    </script>
+{% if not user_timers %}
+<br>
+<div class="border-top pt-3">
+  <small class="text-muted">
+      Your Dashboard Is Empty. <a class="ml-2" href="{% url 'create_timer' %}">Create Your First Timer Now!</a>
+  </small>
+</div>
+
+{% else %}
+{% for timer in user_timers %}
+    <div class="card mt-2">
+      <div class="card-body">
+        <h5 class="card-title">{{ timer.stop_name }}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{ timer.route_name }} - {{ timer.direction_name }}</h6>    
+          <p class="card-text"><span id="{{timer.name}}_display">{{ timer.display }}</span> | <span id="{{timer.name}}_seconds_remaining">{{ timer.duration }}</span> seconds</p>
+      </div>
+    </div>
+        
+    <script type="text/javascript">
+        const {{timer.name}}_intervalID = setInterval({{timer.name}}_update_values, 1000);
+
+        function {{timer.name}}_update_values() {
+            let new_secs = document.getElementById("{{timer.name}}_seconds_remaining");
+            new_secs.textContent = decrement(new_secs.textContent);
+            }
+  </script>
+
+{% endfor %}
+{% endif %}
+</div>
+{% else %}
+<p class="display-8 lead"><strong>Hello, Guest!</strong></p>
+<h2>Sophia's Timers</h2>
+<div class="card mt-2">
+  <div class="card-body">
+    <h5 class="card-title">B Train - Chestnut Hill Ave</h4>
+      <h6 class="card-subtitle mb-2 text-muted">Eastbound</h6>    
+      <p class="card-text"><span id="b_display">{{b_display}}</span> | <span id="b_seconds_remaining">{{b_seconds_remaining}}</span> seconds</p>
+  </div>
+</div>
+<div class="card mt-2">
+<div class="card-body">
+  <h5 class="card-title">C Train - Cleveland Circle</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Eastbound</h6>    
+    <p class="card-text"><span id="c_display">{{c_display}}</span> | <span id="c_seconds_remaining">{{c_seconds_remaining}}</span> seconds</p>
+  </div>
+</div>
+<div class="card mt-2">
+<div class="card-body">
+  <h5 class="card-title">D Train - Reservoir</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Eastbound</h6>    
+    <p class="card-text"><span id="d_display">{{d_display}}</span> | <span id="d_seconds_remaining">{{d_seconds_remaining}}</span> seconds</p>
+</div>
+</div>
+<br>
+<div class="border-top pt-3">
+  <small class="text-muted">
+      Want Your Own Countdown Timer Dashboard? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+  </small>
+</div>
+
+<script type="text/javascript">
+  const intervalID = setInterval(update_values, 1000);
+
+  function decrement(duration) {
+    if (duration > 0)
+      {duration -= 1}
+    return duration
+  }
+
+  function update_values() {
+
+    let b = document.getElementById("b_seconds_remaining");
+    b.textContent = decrement(b.textContent);
+    let c = document.getElementById("c_seconds_remaining");
+    c.textContent = decrement(c.textContent);
+    let d = document.getElementById("d_seconds_remaining");
+    d.textContent = decrement(d.textContent);
+  }
+</script>
+{% endif %}
+{% endblock %}
+
+{% block si_dashboard %}
+<a href="{% url 'edit_dashboard' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+  <div class="d-flex gap-2 w-100 justify-content-between">
+      <h6 class="mb-0">Edit My Dashboard</h6>
+  </div>
+</a>
+{% endblock si_dashboard %}

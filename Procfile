@@ -1,0 +1,1 @@
+web: gunicorn tMinusMbta.wsgi:application --log-file -

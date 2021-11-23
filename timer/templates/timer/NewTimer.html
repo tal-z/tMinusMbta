@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block meta %}<meta http-equiv="refresh" content="15">{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ stop_name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ route_name }} - {{ direction_name }}</h6>    
+      <p class="card-text"><span id="new_display">{{new_display}}</span> | <span id="new_seconds_remaining">{{new_seconds_remaining}}</span> seconds</p>
+    </div>
+  </div>
+  <br>
+  <form action="{% url 'add_timer' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <fieldset style="display:none">
+            {{ dash_update_form }}
+        </fieldset>
+        {% if user.is_authenticated %}
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit" value="Save">Save This Timer</button>
+        </div>
+        {% else %}
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit" value="Save">Login to Save This Timer</button>
+        </div>
+        {% endif %}
+  </form>    
+
+
+
+
+    
+<script type="text/javascript">
+  const intervalID = setInterval(update_values, 1000);
+
+  function decrement(duration) {
+        if (duration > 0)
+          {duration -= 1}
+        return duration
+      }
+
+
+  function update_values() {
+        let new_secs = document.getElementById("new_seconds_remaining");
+        new_secs.textContent = decrement(new_secs.textContent);
+      }
+</script>
+
+{% endblock %}
+

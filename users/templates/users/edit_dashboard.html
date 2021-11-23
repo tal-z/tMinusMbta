@@ -1,0 +1,45 @@
+<!--users/templates/users/dashboard.html-->
+
+{% extends 'base.html' %}
+{% block extrastyle %}
+<style>
+    body > main > div > div.col-md-8 > div > div > div:nth-child(2) > div > a:nth-child(3) {
+        background-color: lightgray;
+        pointer-events: none;
+        cursor: default;
+    }
+    body > main > div > div.col-md-8 > div > div > div:nth-last-child(1) > div > a:nth-child(4) {
+        background-color: lightgray;
+        pointer-events: none;
+        cursor: default;
+    }
+</style>
+{% endblock extrastyle%}
+
+{% block content %}
+<p class="display-8 lead"><strong>Hello, {{ user.username|default:'Guest' }}!</strong></p>
+
+<h2>My Timers</h2>
+<div class="panel panel-default">
+    <script type="text/javascript">
+        function decrement(duration) {
+            if (duration > 0) { duration -= 1 }
+            return duration
+        }
+    </script>
+    {% for timer in user_timers %}
+    <div class="card mt-2">
+        <div class="card-body">
+            <h5 class="card-title">{{ timer.stop_name }}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{ timer.route_name }} - {{ timer.direction_name }}</h6>
+                <!--button class="btn btn-dark btn-sm mr-2">▲ Move Up</button><button class="btn btn-dark btn-sm mr-2">▼ Move Down</button><button class="btn btn-danger btn-sm mr-2"></button-->
+                <a href="{% url 'move_up' timer.timer_id %}" class="btn btn-dark btn-sm mr-1" role="button">▲ Move Up </a>
+                <a href="{% url 'move_down' timer.timer_id %}" class="btn btn-dark btn-sm mr-1" role="button">▼ Move Down </a>
+                <a href="{% url 'delete_timer' timer.timer_id %}" class="btn btn-danger btn-sm mr-1" role="button">Delete </a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}
+

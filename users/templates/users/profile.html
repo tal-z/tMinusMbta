@@ -1,0 +1,77 @@
+<!--users/templates/registration/login.html-->
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block extrastyle %}
+<style>       
+    .content-section {
+        background: #ffffff;
+        padding: 10px 20px;
+        /*border: 1px solid #dddddd;
+        border-radius: 3px;*/
+        margin-bottom: 20px;
+    }
+
+    .thumbnail {
+        border: 0;
+    }
+</style>
+{% endblock extrastyle %}
+
+{% block content %}
+<h2>Profile</h2>
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src="{{ user.profile.image.url }}" class="img-thumbnail rounded"/>
+            <h2>{{ user.username }}</h2>
+        </div>
+        <div class="card-body p-4">
+            <h4>Account Information</h4>
+            <hr class="mt-0 mb-4">
+            <div class="row pt-1">
+            <div class="col-6 mb-3">
+                <h6>Username</h6>
+                <p class="text-muted">{{ user.username }}</p>
+            </div>
+            {% if user.email %}
+            <div class="col-6 mb-3">
+                <h6>Email</h6>
+                <p class="text-muted">{{ user.email }}</p>
+            </div>
+            {% endif %}
+            </div>
+            <div class="row pt-1">
+                <div class="col-6 mb-3">
+                    <h6>First Name</h6>
+                    <p class="text-muted">{{ user.first_name }}</p>
+                </div>
+                <div class="col-6 mb-3">
+                    <h6>Last Name</h6>
+                    <p class="text-muted">{{ user.last_name }}</p>
+                </div>
+            </div>
+            <h4>Home Address</h4>
+            <hr class="mt-0 mb-4">
+            <p class="text-muted">Coming soon...filter out rides based on walking distance from your home!</p>
+        </div>
+    </div>
+   
+{% endblock content %}
+
+{% block si_profile %}
+<a href="{% url 'edit_profile' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+  <div class="d-flex gap-2 w-100 justify-content-between">
+      <h6 class="mb-0">Edit My Profile</h6>
+  </div>
+</a>
+{% if has_password %}
+<a href="{% url 'password_change' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+        <h6 class="mb-0">Change Password</h6>
+    </div>
+</a>
+{% endif %}
+{% endblock si_profile %}
+
+

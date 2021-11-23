@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block meta %}<meta http-equiv="refresh" content="15">{% endblock %}
+
+{% block content %}
+  <h2>My Timers</h2>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">B Train - Chestnut Hill Ave</h4>
+          <h6 class="card-subtitle mb-2 text-muted">Eastbound</h6>    
+          <p class="card-text"><span id="b_display">{{b_display}}</span> | <span id="b_seconds_remaining">{{b_seconds_remaining}}</span> seconds</p>
+      </div>
+    </div>
+    <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">C Train - Cleveland Circle</h4>
+        <h6 class="card-subtitle mb-2 text-muted">Eastbound</h6>    
+        <p class="card-text"><span id="c_display">{{c_display}}</span> | <span id="c_seconds_remaining">{{c_seconds_remaining}}</span> seconds</p>
+      </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">D Train - Reservoir</h4>
+        <h6 class="card-subtitle mb-2 text-muted">Eastbound</h6>    
+        <p class="card-text"><span id="d_display">{{d_display}}</span> | <span id="d_seconds_remaining">{{d_seconds_remaining}}</span> seconds</p>
+    </div>
+  </div>
+    <br>
+
+   <script type="text/javascript">
+      const intervalID = setInterval(update_values, 1000);
+
+      function decrement(duration) {
+        if (duration > 0)
+          {duration -= 1}
+        return duration
+      }
+
+      function update_values() {
+
+        let b = document.getElementById("b_seconds_remaining");
+        b.textContent = decrement(b.textContent);
+        let c = document.getElementById("c_seconds_remaining");
+        c.textContent = decrement(c.textContent);
+        let d = document.getElementById("d_seconds_remaining");
+        d.textContent = decrement(d.textContent);
+      }
+</script>
+{% endblock %}

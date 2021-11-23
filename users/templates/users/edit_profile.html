@@ -1,0 +1,47 @@
+<!--users/templates/registration/login.html-->
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block extrastyle %}
+<style>
+    .content-section {
+        background: #ffffff;
+        padding: 10px 20px;
+        /*border: 1px solid #dddddd;
+        border-radius: 3px;*/
+        margin-bottom: 20px;
+    }
+
+    .thumbnail {
+        border: 0;
+    }
+</style>
+{% endblock extrastyle %}
+
+{% block content %}
+    <h2>Edit Profile</h2>
+    <form method="POST" enctype="multipart/form-data" class="form-group">
+        {% csrf_token %}
+        <fieldset>
+            <legend class="border-bottom mb-4">Update Profile Information</legend>
+            {{u_form|crispy}}
+            {{p_form|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit" value="Update">Update Profile</button>
+        </div>
+    </form>
+
+{% endblock content %}
+
+{% block extra_sidebar_items%}
+{% if user.email %}
+<a href="{% url 'password_change' %}" class="list-group-item list-group-item-action d-flex gap-3 py-3"
+    aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+        <h6 class="mb-0">Change Password</h6>
+    </div>
+</a>
+{% endif %}
+{% endblock extra_sidebar_items%}
