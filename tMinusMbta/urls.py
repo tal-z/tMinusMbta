@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import user_logout
+from users.views import user_logout, dashboard
 from django.contrib.auth import views as auth_views
 
 
@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^accounts/', include("django.contrib.auth.urls")),
     path(r'timer/', include('timer.urls')),
     url(r'^', include("users.urls")),
+    url(r'^', dashboard),
     url(r'^admin/', admin.site.urls),
 ]
 
