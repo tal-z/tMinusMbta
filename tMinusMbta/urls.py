@@ -27,9 +27,9 @@ urlpatterns = [
     url(r'^accounts/logout/', user_logout, name='logout'),
     url(r'^accounts/', include("django.contrib.auth.urls")),
     path(r'timer/', include('timer.urls')),
+    url(r'^admin/', admin.site.urls),
     url(r'^', include("users.urls")),
     url(r'^', dashboard),
-    url(r'^admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:
