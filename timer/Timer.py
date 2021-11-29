@@ -7,9 +7,10 @@ import math
 import os
 import pytz
 
-
-
 load_dotenv()
+
+est = pytz.timezone('America/New_York')
+
 
 sess = session()
 API_KEY = os.getenv('MBTA_API_KEY')
@@ -42,7 +43,7 @@ class Timer:
 
     @property
     def time_until_arrival(self):
-        current_time = datetime.datetime.now(pytz.est)
+        current_time = datetime.datetime.now(est)
         return self.arrival_time - current_time
 
 
@@ -100,7 +101,7 @@ class Timer:
             future_schedules = [sched for sched in future_schedules if
                                 datetime.datetime.strptime(sched['attributes']['departure_time'],
                                                            '%Y-%m-%dT%H:%M:%S-05:00')
-                                > datetime.datetime.now(pytz.est)]
+                                > datetime.datetime.now(est)]
             if future_schedules:
                 future_schedules = sorted(future_schedules,
                                           key=lambda x: datetime.datetime.strptime(
@@ -136,8 +137,8 @@ class Timer:
                 future_predictions = [pred for pred in future_predictions
                                       if datetime.datetime.strptime(pred['attributes']['arrival_time'],
                                                                     '%Y-%m-%dT%H:%M:%S-05:00')
-                                      > datetime.datetime.now(pytz.est)]
-                print("current time: ", datetime.datetime.now(pytz.est))
+                                      > datetime.datetime.now(est)]
+                print("current time: ", datetime.datetime.now(est))
                 print("filtered predictions:", future_predictions)
                 if future_predictions:
                     future_predictions = sorted(future_predictions,
