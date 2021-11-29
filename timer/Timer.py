@@ -87,8 +87,8 @@ class Timer:
 
     def set_schedule(self):
         self.schedule = sess.get(self.schedule_url, headers={"x-api-key": API_KEY}).json()
-        print('checking for schedule')
-        print(self.schedule)
+        #print('checking for schedule')
+        #print(self.schedule)
 
         if 'data' in self.schedule:
             future_schedules = self.schedule['data']
@@ -115,6 +115,7 @@ class Timer:
     def set_prediction(self):
         self.predictions = sess.get(self.predictions_url, headers={"x-api-key": API_KEY}).json()
         print("checking for predictions")
+        print("URL:", self.predictions_url)
         print(self.predictions)
 
 
