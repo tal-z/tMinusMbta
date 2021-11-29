@@ -172,31 +172,31 @@ d_countdown = 10
 
 b_timer = Timer(duration=b_countdown,
                 name='b',
-                predictions_url='https://api-v3.mbta.com/predictions/'
+                predictions_url='https://api-v3.mbta.com/predictions'
                                 '?filter[stop]=place-chill'
                                 '&filter[route]=Green-B'
                                 '&filter[direction_id]=1',
-                schedule_url='https://api-v3.mbta.com/schedules/'
+                schedule_url='https://api-v3.mbta.com/schedules'
                              '?filter[stop]=place-chill'
                              '&filter[route]=Green-B'
                              '&filter[direction_id]=1')
 c_timer = Timer(duration=c_countdown,
                 name='c',
-                predictions_url='https://api-v3.mbta.com/predictions/'
+                predictions_url='https://api-v3.mbta.com/predictions'
                                 '?filter[stop]=place-clmnl'
                                 '&filter[route]=Green-C'
                                 '&filter[direction_id]=1',
-                schedule_url='https://api-v3.mbta.com/schedules/'
+                schedule_url='https://api-v3.mbta.com/schedules'
                              '?filter[stop]=place-clmnl'
                              '&filter[route]=Green-C'
                              '&filter[direction_id]=1')
 d_timer = Timer(duration=d_countdown,
                 name='d',
-                predictions_url='https://api-v3.mbta.com/predictions/'
+                predictions_url='https://api-v3.mbta.com/predictions'
                                 '?filter[stop]=place-rsmnl'
                                 '&filter[route]=Green-D'
                                 '&filter[direction_id]=1',
-                schedule_url='https://api-v3.mbta.com/schedules/'
+                schedule_url='https://api-v3.mbta.com/schedules'
                              '?filter[stop]=place-rsmnl'
                              '&filter[route]=Green-D'
                              '&filter[direction_id]=1')
