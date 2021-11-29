@@ -113,10 +113,13 @@ class Timer:
 
 
     def set_prediction(self):
-        self.predictions = sess.get(self.predictions_url, headers={"x-api-key": API_KEY}).json()
+        response = sess.get(self.predictions_url, headers={"x-api-key": API_KEY})
+        self.predictions = response.json()
         print("checking for predictions")
         print("URL:", self.predictions_url)
         print(self.predictions)
+        print(response.headers)
+
 
 
         if 'data' in self.predictions:
