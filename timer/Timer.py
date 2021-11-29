@@ -134,6 +134,7 @@ class Timer:
                                       if datetime.datetime.strptime(pred['attributes']['arrival_time'],
                                                                     '%Y-%m-%dT%H:%M:%S-05:00')
                                       > datetime.datetime.now()]
+                print("current time: ", datetime.datetime.now())
                 print("filtered predictions:", future_predictions)
                 if future_predictions:
                     future_predictions = sorted(future_predictions,
