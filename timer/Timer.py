@@ -5,6 +5,9 @@ import datetime
 from time import sleep
 import math
 import os
+import pytz
+
+
 
 load_dotenv()
 
@@ -39,7 +42,7 @@ class Timer:
 
     @property
     def time_until_arrival(self):
-        current_time = datetime.datetime.now()
+        current_time = datetime.datetime.now(pytz.est)
         return self.arrival_time - current_time
 
 
@@ -97,7 +100,7 @@ class Timer:
             future_schedules = [sched for sched in future_schedules if
                                 datetime.datetime.strptime(sched['attributes']['departure_time'],
                                                            '%Y-%m-%dT%H:%M:%S-05:00')
-                                > datetime.datetime.now()]
+                                > datetime.datetime.now(pytz.est)]
             if future_schedules:
                 future_schedules = sorted(future_schedules,
                                           key=lambda x: datetime.datetime.strptime(
@@ -133,8 +136,8 @@ class Timer:
                 future_predictions = [pred for pred in future_predictions
                                       if datetime.datetime.strptime(pred['attributes']['arrival_time'],
                                                                     '%Y-%m-%dT%H:%M:%S-05:00')
-                                      > datetime.datetime.now()]
-                print("current time: ", datetime.datetime.now())
+                                      > datetime.datetime.now(pytz.est)]
+                print("current time: ", datetime.datetime.now(pytz.est))
                 print("filtered predictions:", future_predictions)
                 if future_predictions:
                     future_predictions = sorted(future_predictions,
