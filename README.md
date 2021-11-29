@@ -4,7 +4,7 @@
   - fix username on recurse authentication
   - set up two authentication apps for github, one for local and one for prod
 
-  Environments
+###### Environments
   - remove .env from repo (all the way, meaning delete repo and rebuild it)
   - set environment variables in heroku
   - only call load_dotenv once, in settings.py
