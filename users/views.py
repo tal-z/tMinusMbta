@@ -71,6 +71,12 @@ def delete_timer(request, timer_id):
     timer = UserTimer.objects.filter(user=request.user, timers=timer_id)
     print(timer)
     timer.delete()
+    all_timers = UserTimer.objects.filter(user=request.user).order_by('display_order')
+    count = 1
+    for timer in all_timers:
+        timer.display_order = count
+        timer.save()
+        count += 1
     messages.info(request, "Your timer has been deleted!")
     return redirect("edit_dashboard")
 
@@ -89,7 +95,7 @@ def move_up(request, timer_id):
 def move_down(request, timer_id):
     user_timers = UserTimer.objects.filter(user=request.user)
     requested_timer = UserTimer.objects.get(user=request.user, timers=timer_id)
-    if requested_timer.display_order < len(user_timers):
+    if requested_timer.display_order < max(timer.display_order for timer in user_timers):
         swapping_timer = UserTimer.objects.get(user=request.user, display_order=requested_timer.display_order+1)
         requested_timer.display_order += 1
         requested_timer.save()
