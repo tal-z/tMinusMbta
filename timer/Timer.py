@@ -44,7 +44,7 @@ class Timer:
     @property
     def time_until_arrival(self):
         current_time = datetime.datetime.now(est)
-        return self.arrival_time - current_time
+        return est.localize(self.arrival_time) - current_time
 
 
 
@@ -99,8 +99,8 @@ class Timer:
             future_schedules = [sched for sched in future_schedules if
                                 sched['attributes']['departure_time'] is not None]
             future_schedules = [sched for sched in future_schedules if
-                                datetime.datetime.strptime(sched['attributes']['departure_time'],
-                                                           '%Y-%m-%dT%H:%M:%S-05:00')
+                                est.localize(datetime.datetime.strptime(sched['attributes']['departure_time'],
+                                                           '%Y-%m-%dT%H:%M:%S-05:00'))
                                 > datetime.datetime.now(est)]
             if future_schedules:
                 future_schedules = sorted(future_schedules,
@@ -135,8 +135,8 @@ class Timer:
                     future_predictions = [pred for pred in json_data
                                           if pred['attributes']['arrival_time'] is not None]
                 future_predictions = [pred for pred in future_predictions
-                                      if datetime.datetime.strptime(pred['attributes']['arrival_time'],
-                                                                    '%Y-%m-%dT%H:%M:%S-05:00')
+                                      if est.localize(datetime.datetime.strptime(pred['attributes']['arrival_time'],
+                                                                    '%Y-%m-%dT%H:%M:%S-05:00'))
                                       > datetime.datetime.now(est)]
                 print("current time: ", datetime.datetime.now(est))
                 print("filtered predictions:", future_predictions)
@@ -161,10 +161,10 @@ class Timer:
     def set_timer(self):
         try:
             self.set_prediction()
-        except TypeError:
-            self.status = 'type error'
-            self.arrival_time = None
-            self.duration = 0
+        #except TypeError:
+         #   self.status = 'type error'
+          #  self.arrival_time = None
+           # self.duration = 0
         except IndexError:
             self.status = 'index error'
             self.arrival_time = None
