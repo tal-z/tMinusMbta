@@ -11,3 +11,6 @@
 
 ###### Automated Email
   - find out why three are being sent instead of just 1...
+
+###### Security
+  - Add CSP... see django-csp

@@ -1,5 +1,5 @@
 
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from requests import session
 import datetime
 from time import sleep
@@ -7,7 +7,7 @@ import math
 import os
 import pytz
 
-load_dotenv()
+#load_dotenv()
 
 est = pytz.timezone('America/New_York')
 
@@ -124,8 +124,6 @@ class Timer:
         print(self.predictions)
         print(response.headers)
 
-
-
         if 'data' in self.predictions:
             if self.predictions['data']:
                 json_data = self.predictions['data']
@@ -134,10 +132,14 @@ class Timer:
                 if not future_predictions:
                     future_predictions = [pred for pred in json_data
                                           if pred['attributes']['arrival_time'] is not None]
-                future_predictions = [pred for pred in future_predictions
-                                      if est.localize(datetime.datetime.strptime(pred['attributes']['arrival_time'],
-                                                                    '%Y-%m-%dT%H:%M:%S-05:00'))
-                                      > datetime.datetime.now(est)]
+                try:
+                    future_predictions = [pred for pred in future_predictions
+                                        if est.localize(datetime.datetime.strptime(pred['attributes']['arrival_time'],
+                                                                        '%Y-%m-%dT%H:%M:%S-05:00'))
+                                        > datetime.datetime.now(est)]
+                except TypeError: 
+                    future_predictions = []
+                    
                 print("current time: ", datetime.datetime.now(est))
                 print("filtered predictions:", future_predictions)
                 if future_predictions:
@@ -164,15 +166,15 @@ class Timer:
         except TypeError:
             self.status = 'type error'
             self.arrival_time = None
-            self.duration = 0
+            self.duration = -99
         except IndexError:
             self.status = 'index error'
             self.arrival_time = None
-            self.duration = 0
+            self.duration = -99
         except KeyError:
             self.status = 'key error'
             self.arrival_time = None
-            self.duration = 0
+            self.duration = -99
 
         self.set_display()
 

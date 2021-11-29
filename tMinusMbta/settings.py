@@ -25,7 +25,6 @@ SECRET_KEY = '8463decfbcba3ffaf2a6e66e02bbf66be17d5f0cb0d2dc62'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.getenv('DEBUG_MODE'))
-print(DEBUG)
 
 ALLOWED_HOSTS = ['127.0.0.1', 'tminusmbta.herokuapp.com']
 
@@ -94,6 +93,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
