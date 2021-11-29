@@ -29,8 +29,10 @@ class Timer:
         self.name = name
         self.predictions_url = predictions_url
         self.predictions = sess.get(self.predictions_url, headers={"x-api-key": API_KEY}).json()
+        print(self.predictions)
         self.schedule_url = schedule_url
         self.schedule = sess.get(self.schedule_url, headers={"x-api-key": API_KEY}).json()
+        print(self.schedule)
         self.duration = duration
         self.arrival_time = None
         self.departure_time = None
