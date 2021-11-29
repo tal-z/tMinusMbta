@@ -161,10 +161,10 @@ class Timer:
     def set_timer(self):
         try:
             self.set_prediction()
-        #except TypeError:
-         #   self.status = 'type error'
-          #  self.arrival_time = None
-           # self.duration = 0
+        except TypeError:
+            self.status = 'type error'
+            self.arrival_time = None
+            self.duration = 0
         except IndexError:
             self.status = 'index error'
             self.arrival_time = None
