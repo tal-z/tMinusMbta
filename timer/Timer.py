@@ -29,10 +29,8 @@ class Timer:
         self.name = name
         self.predictions_url = predictions_url
         self.predictions = sess.get(self.predictions_url, headers={"x-api-key": API_KEY}).json()
-        print(self.predictions)
         self.schedule_url = schedule_url
         self.schedule = sess.get(self.schedule_url, headers={"x-api-key": API_KEY}).json()
-        print(self.schedule)
         self.duration = duration
         self.arrival_time = None
         self.departure_time = None
@@ -88,7 +86,10 @@ class Timer:
         return self.display
 
     def set_schedule(self):
+        self.schedule = sess.get(self.schedule_url, headers={"x-api-key": API_KEY}).json()
         print('checking for schedule')
+        print(self.schedule)
+
         if 'data' in self.schedule:
             future_schedules = self.schedule['data']
             future_schedules = [sched for sched in future_schedules if
@@ -112,10 +113,11 @@ class Timer:
 
 
     def set_prediction(self):
-        self.predictions = sess.get(self.predictions_url, headers={"x-api-key": API_KEY})
-        #print(self.predictions.headers)
-        self.predictions = self.predictions.json()
-        #print("all predictions:", self.name, self.predictions)
+        self.predictions = sess.get(self.predictions_url, headers={"x-api-key": API_KEY}).json()
+        print("checking for predictions")
+        print(self.predictions)
+
+
         if 'data' in self.predictions:
             if self.predictions['data']:
                 json_data = self.predictions['data']
