@@ -115,7 +115,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
-    #'social_core.backends.recurse.RecurseOAuth2',
+    'social_core.backends.recurse.RecurseOAuth2',
 ]
 
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get("SOCIAL_AUTH_GITHUB_KEY")
