@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import django_heroku
 
 load_dotenv()
 
@@ -84,11 +85,10 @@ WSGI_APPLICATION = 'tMinusMbta.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tMinusMbta',
     }
 }
-
 
 
 # Password validation
@@ -147,12 +147,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'staticfiles'),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -185,10 +184,12 @@ SECURE_SSL_REDIRECT = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 SECURE_HSTS_SECONDS = 3600
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
