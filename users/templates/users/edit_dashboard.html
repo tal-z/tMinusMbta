@@ -27,6 +27,15 @@
             return duration
         }
     </script>
+    {% if not user_timers %}
+    <br>
+    <div class="border-top pt-3">
+      <small class="text-muted">
+          Your Dashboard Is Empty. <a class="ml-2" href="{% url 'create_timer' %}">Create Your First Timer Now!</a>
+      </small>
+    </div>
+    
+    {% else %}
     {% for timer in user_timers %}
     <div class="card mt-2">
         <div class="card-body">
@@ -40,6 +49,7 @@
     </div>
 
     {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}
 
