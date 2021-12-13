@@ -83,26 +83,12 @@ WSGI_APPLICATION = 'tMinusMbta.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-if bool(os.getenv('DEBUG_MODE')):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd7toldc649hseb',
-            'USER': 'vfpoujdflwtdqh',
-            'PASSWORD': '36dfaca76253e5710a71cb077ccd54245faedf950e3060d00f6d5d238fb3b295',
-            'HOST': 'ec2-54-144-165-97.compute-1.amazonaws.com',
-            'PORT':  '5432'
-        }
-    }
-
+}
 
 
 # Password validation
