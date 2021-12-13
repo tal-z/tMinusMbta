@@ -99,7 +99,7 @@ else:
             'USER': 'vfpoujdflwtdqh',
             'PASSWORD': '36dfaca76253e5710a71cb077ccd54245faedf950e3060d00f6d5d238fb3b295',
             'HOST': 'ec2-54-144-165-97.compute-1.amazonaws.com',
-            'PORT':  5432
+            'PORT':  '5432'
         }
     }
 
