@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from users.forms import CustomUserCreationForm, UserUpdateForm, DashboardUpdateForm#, ProfileUpdateForm
+from users.forms import CustomUserCreationForm, UserUpdateForm, DashboardUpdateForm, ProfileUpdateForm
 from users.models import UserTimer
 from timer.models import StoredTimer
 from timer.Timer import Timer, timers
