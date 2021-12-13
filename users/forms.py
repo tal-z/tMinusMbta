@@ -3,7 +3,7 @@ from django.contrib.auth import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm, EmailField
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, UserTimer
+from .models import UserTimer, Profile
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -21,7 +21,7 @@ class UserUpdateForm(ModelForm):
 class ProfileUpdateForm(ModelForm):
     class Meta: 
         model = Profile
-        fields = ['image']
+        fields = '__all__'
 
 
 class DashboardUpdateForm(ModelForm):
