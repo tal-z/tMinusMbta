@@ -21,7 +21,7 @@ class UserUpdateForm(ModelForm):
 class ProfileUpdateForm(ModelForm):
     class Meta: 
         model = Profile
-        fields = 'all'
+        fields = '__all__'
 
 
 class DashboardUpdateForm(ModelForm):
