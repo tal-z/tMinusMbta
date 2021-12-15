@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'tMinusMbta.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if bool(os.getenv('DEBUG_MODE')):
+if os.getenv('DEBUG_MODE') == 'True':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -92,6 +92,18 @@ if bool(os.getenv('DEBUG_MODE')):
             'PASSWORD': '123456789',
             'HOST': 'localhost',
             'PORT': '',
+        }
+    }
+
+elif os.getenv('DEBUG_MODE'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'd7toldc649hseb',
+            'USER': 'vfpoujdflwtdqh',
+            'PASSWORD': '36dfaca76253e5710a71cb077ccd54245faedf950e3060d00f6d5d238fb3b295',
+            'HOST': 'ec2-54-144-165-97.compute-1.amazonaws.com',
+            'PORT': '5432',
         }
     }
 
@@ -106,7 +118,7 @@ else:
             'PORT': '5432',
         }
     }
-
+    
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
