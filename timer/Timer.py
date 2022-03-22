@@ -101,19 +101,19 @@ class Timer:
                                 sched['attributes']['departure_time'] is not None]
             future_schedules = [sched for sched in future_schedules if
                                 est.localize(datetime.datetime.strptime(sched['attributes']['departure_time'],
-                                                           '%Y-%m-%dT%H:%M:%S-05:00'))
+                                                           '%Y-%m-%dT%H:%M:%S-04:00'))
                                 > datetime.datetime.now(est)]
             if future_schedules:
                 future_schedules = sorted(future_schedules,
                                           key=lambda x: datetime.datetime.strptime(
                                               x['attributes']['departure_time'],
-                                              '%Y-%m-%dT%H:%M:%S-05:00'))
+                                              '%Y-%m-%dT%H:%M:%S-04:00'))
                 #print("future schedules:", future_schedules)
                 upcoming_schedule = future_schedules[0]
                 self.status = 'No Live Prediction Available'
                 self.arrival_time = datetime.datetime.strptime(
                     upcoming_schedule['attributes']['departure_time'],
-                    '%Y-%m-%dT%H:%M:%S-05:00')
+                    '%Y-%m-%dT%H:%M:%S-04:00')
                 self.duration = self.time_until_arrival.seconds
 
 
@@ -136,7 +136,7 @@ class Timer:
                 try:
                     future_predictions = [pred for pred in future_predictions
                                         if est.localize(datetime.datetime.strptime(pred['attributes']['arrival_time'],
-                                                                        '%Y-%m-%dT%H:%M:%S-05:00'))
+                                                                        '%Y-%m-%dT%H:%M:%S-04:00'))
                                         > datetime.datetime.now(est)]
                 except TypeError: 
                     future_predictions = []
@@ -147,12 +147,12 @@ class Timer:
                     future_predictions = sorted(future_predictions,
                                                 key=lambda x: datetime.datetime.strptime(
                                                     x['attributes']['arrival_time'],
-                                                    '%Y-%m-%dT%H:%M:%S-05:00'))
+                                                    '%Y-%m-%dT%H:%M:%S-04:00'))
                     upcoming_prediction = future_predictions[0]
                     print("upcoming prediction:", upcoming_prediction)
                     self.status = upcoming_prediction['attributes']['status']
                     self.arrival_time = datetime.datetime.strptime(upcoming_prediction['attributes']['arrival_time'],
-                                                                   '%Y-%m-%dT%H:%M:%S-05:00')
+                                                                   '%Y-%m-%dT%H:%M:%S-04:00')
                     self.duration = self.time_until_arrival.seconds
                 else:
                     self.set_schedule()
