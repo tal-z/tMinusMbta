@@ -91,7 +91,7 @@ class Timer:
 
     def set_schedule(self):
         self.schedule = sess.get(self.schedule_url, headers={"x-api-key": API_KEY}).json()
-        #print('checking for schedule')
+        print('checking for schedule')
         #print(self.schedule)
 
         if 'data' in self.schedule:
